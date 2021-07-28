@@ -74,6 +74,17 @@ namespace RestASPNET.Controllers
             return BadRequest("Invalid Input");
         }
 
+        [HttpGet("media/{firstNumber}/{secondNumber}/{thirdNumber}")]
+        public IActionResult GetMedia(string firstNumber, string secondNumber, string thirdNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber) && IsNumeric(thirdNumber))
+            {
+                var media = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber) + ConvertToDecimal(thirdNumber)) / 3;
+                return Ok(media.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
         private decimal ConvertToDecimal(string strNumber)
         {
             if (decimal.TryParse(strNumber, out decimal decimalValue))
