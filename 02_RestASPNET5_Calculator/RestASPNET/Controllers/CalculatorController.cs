@@ -52,6 +52,17 @@ namespace RestASPNET.Controllers
             return BadRequest("Invalid Input");
         }
 
+        [HttpGet("division/{firstNumber}/{secondNumber}")]
+        public IActionResult GetDivision(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var division = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
+                return Ok(division.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
         private decimal ConvertToDecimal(string strNumber)
         {
             if (decimal.TryParse(strNumber, out decimal decimalValue))
