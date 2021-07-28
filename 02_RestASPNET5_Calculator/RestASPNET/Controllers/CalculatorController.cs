@@ -20,12 +20,34 @@ namespace RestASPNET.Controllers
         }
 
         [HttpGet("sum/{firstNumber}/{secondNumber}")]
-        public IActionResult Get(string firstNumber, string secondNumber)
+        public IActionResult GetSum(string firstNumber, string secondNumber)
         {
             if(IsNumeric(firstNumber) && IsNumeric(secondNumber))
             {
                 var sum = ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber);
                 return Ok(sum.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("subtract/{firstNumber}/{secondNumber}")]
+        public IActionResult GetSubtract(string firstNumber, string secondNumber)
+        {
+            if(IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var subtract = ConvertToDecimal(firstNumber) - ConvertToDecimal(secondNumber);
+                return Ok(subtract.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("multiply/{firstNumber}/{secondNumber}")]
+        public IActionResult GetMultiply(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var multiply = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
+                return Ok(multiply.ToString());
             }
             return BadRequest("Invalid Input");
         }
